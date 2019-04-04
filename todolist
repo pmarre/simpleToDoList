@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>To Do List</title
+  <link href="https://fonts.googleapis.com/css?family=Roboto|Shadows+Into+Light" rel="stylesheet">
+  <style>
+  
+body {
+  background-color: lightcoral;
+}
+
+h1 {
+  margin: 20px auto;
+  font-family: "Shadows Into Light", cursive;
+}
+
+.todo {
+  display: flex;
+  background-color: #fff;
+  flex-direction: column;
+  width: 500px;
+  margin: 20px auto;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 10px 15px 10px 10px rgba(0,0,0, .1);
+}
+
+#todo_input {
+  padding: 5px;
+  border: 1px solid gainsboro;
+  border-radius: 5px;
+  font-family: 'Roboto', sans-serif;
+}
+
+.btnDiv {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 15px;
+}
+
+#submit,
+#clear {
+  width: 150px;
+  height: 40px;
+  margin: 0 15px;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-size: 1.125rem;
+  line-height: 40px;
+  font-family: 'Roboto', sans-serif;
+}
+
+#submit {
+  background-color: coral;
+}
+
+#clear {
+  background-color: grey;
+}
+
+#todo_list {
+  padding: 0;
+}
+
+#todo_list li {
+  margin: 10px 0;
+  padding: 10px;
+  list-style: none;
+  max-height: 0;
+  font-size: 1.125rem;
+  font-family: "Shadows Into Light", cursive;
+}
+
+#todo_list li.complete {
+  text-decoration: line-through;
+  opacity: .5;
+}
+
+#todo_list li.added {
+  max-height: 100px;
+  transition: max-height 0.4s linear;
+}
+
+#todo_list li:nth-child(even) {
+  background-color: gainsboro;
+}
+
+
+  </style>
+</head>
+<body id="body">
+  <div class="todo">
+    <h1>To Do List</h1>
+    <input type="text" placeholder="To Do" id="todo_input">
+    <div class="btnDiv">
+      <button id="submit">Submit</button>
+       <button id="clear">Clear</button>
+    </div>
+    <ul id="todo_list"></ul>
+  </div>
+  <script>
+  const todo_input = document.getElementById('todo_input');
+  const ul = document.getElementById('todo_list');
+  const submitBtn = document.getElementById('submit');
+  const clearBtn = document.getElementById('clear');
+
+submitBtn.addEventListener('click', function(){
+  var inputVal = todo_input.value;
+  var val = document.createTextNode(inputVal);
+  var li = document.createElement('li');
+  if (val.length > 0 ) {
+    li.appendChild(val);
+    li.classList.add('added');
+    ul.appendChild(li);
+  }
+   todo_input.value = '';
+});
+
+ul.addEventListener('click', function(e){
+  if (e.target.tagName === 'LI') {
+    e.target.classList.toggle('complete');
+  }
+}, false);
+
+clearBtn.addEventListener('click', function(){
+  while(ul.hasChildNodes()) {
+    ul.removeChild(ul.firstChild);
+  }
+});
+  </script>
+</body>
+</html>
